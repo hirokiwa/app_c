@@ -1,3 +1,7 @@
+// じゃんけんをした後に「続けますか？」というメッセージを表示
+// 続ける場合は１、やめる場合は１以外の数を入力
+// 累積の勝敗（入力側　〇勝〇敗〇分け）
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -8,32 +12,20 @@ typedef enum janken{
         Pa = 5
     } JPON;
 
-// int saikoro(void){
-//     int sai, n;
-//     srand((unsigned)time(NULL));
-//     n = rand();
-//     sai = n % 5 + 1;
-//     return(sai);
-// }
-
 int sysjan(void){
-    int sai, n, pon;
+    int sai, pon;
 
     srand((unsigned)time(NULL));
-    // n = rand();
-    sai = rand() % 5 + 1;
+    sai = rand() % 3;
 
     switch(sai){
-        case 1:
-        case 2:
+        case 0:
             pon = 0;
             break;
-        case 3:
-        case 4:
+        case 1:
             pon = 2;
             break;
-        case 5:
-        case 6:
+        case 2:
             pon = 5;
             break;
     }
@@ -72,29 +64,28 @@ int shoubu(JPON kenin, JPON kenout){
     int shoubukekka;
     switch(kenin){
         case Gu:
-            if(kenout == Gu) shoubukekka = 0;
-            else if(kenout == Choki) shoubukekka = 1;
-            else shoubukekka = -1;
-            break;
-        case Choki:
-            if(kenout == Gu) shoubukekka = -1;
+            if(kenout == Gu) shoubukekka = 2;
             else if(kenout == Choki) shoubukekka = 0;
             else shoubukekka = 1;
             break;
-        case Pa:
+        case Choki:
             if(kenout == Gu) shoubukekka = 1;
-            else if(kenout == Choki) shoubukekka = -1;
+            else if(kenout == Choki) shoubukekka = 2;
             else shoubukekka = 0;
             break;
+        case Pa:
+            if(kenout == Gu) shoubukekka = 0;
+            else if(kenout == Choki) shoubukekka = 1;
+            else shoubukekka = 2;
+            break;
     }
-    return(shoubukekka);
-}
 
-void kekka(int shoubukekka){
-    if(shoubukekka == -1) printf("\nあなたの負けです。\n");
-    else if(shoubukekka == 1) printf("\nあなた勝ちです。\n");
-    else if(shoubukekka == 0) printf("\nあいこです。\n");
+    if(shoubukekka == 0) printf("\nあなたの勝ちです。\n");
+    else if(shoubukekka == 1) printf("\nあなた負けです。\n");
+    else if(shoubukekka == 2) printf("\nあいこです。\n");
     else printf("\n引数のエラーです。\n");
+
+    return(shoubukekka);
 }
 
 int main(void){
@@ -105,35 +96,36 @@ int main(void){
     int sai;
     int shoubukekka;
     int cont;
+    int score[3] = {0};
 
     do{
-        printf("\nじゃんけんをしましょう。\n");
-        printf("\nグーは0 チョキは2 パーは5 を入れます。\n");
-        printf("\nじゃんけぽん！はいどうぞ：\a");
-        scanf("%d", &ken_buf);
-        choken = (JPON)ken_buf;
-        if((choken != Gu) && (choken != Choki) && (choken != Pa)){
-            printf("\n＠＠＠＠正しく入れてください！＠＠＠＠\n");
-        }
-    } while(!(choken == Gu || choken == Choki || choken == Pa));
+        do{
+            printf("\nじゃんけんをしましょう。\n");
+            printf("\nグーは0 チョキは2 パーは5 を入れます。\n");
+            printf("\nじゃんけぽん！はいどうぞ：\a");
+            scanf("%d", &ken_buf);
+            choken = (JPON)ken_buf;
+            if((choken != Gu) && (choken != Choki) && (choken != Pa)){
+                printf("\n＠＠＠＠正しく入れてください！＠＠＠＠\n");
+            }
+        } while(!(choken == Gu || choken == Choki || choken == Pa));
 
-    // sai = saikoro();
-    sysken = sysjan();
+        sysken = sysjan();
 
-    shoubukekka = shoubu(choken, sysken);
+        printf("\a");
+        anatanoken(choken);
+        watashinoken(sysken);
+        shoubukekka = shoubu(choken, sysken);
 
-    printf("\a");
-    anatanoken(choken);
-    watashinoken(sysken);
-    kekka(shoubukekka);
+        score[shoubukekka] += 1;
+        printf("入力側 %d勝%d敗%d分け\n", score[0], score[1], score[2]);
 
-    printf("\n続けますか？\n");
-    printf("続ける：０/終わる：１\n");
-    scanf("%d", &cont);
+        printf("\n続けますか？\n");
+        printf("続ける：０/終わる：１\n");
+        scanf("%d", &cont);
+    } while(cont == 0);
 
-
-
-    // printf("\n終わります。おつかれさまでした。\n\n");
+    printf("\n終わります。おつかれさまでした。\n\n");
 
     return(0);
 }
