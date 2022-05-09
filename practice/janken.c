@@ -3,10 +3,10 @@
 #include <time.h>
 
 typedef enum janken{
-        Gu = 0,
-        Choki = 2,
-        Pa = 5
-    } JPON;
+    Gu = 0,
+    Choki = 2,
+    Pa = 5
+} JPON;
 
 int saikoro(void){
     int sai, n;
@@ -52,7 +52,7 @@ void watashinoken(JPON ken){
 void anatanoken(JPON ken){
     switch(ken){
         case Gu:
-            printf("あたたはグーを出しました。\n");
+            printf("あなたはグーを出しました。\n");
             break;
         case Choki:
             printf("あなたはチョキを出しました。\n");
