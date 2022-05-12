@@ -21,29 +21,18 @@ int sysjan(void){
     switch(sai){
         case 0:
             pon = 0;
+            printf("私はグーを出しました。\n");
             break;
         case 1:
             pon = 2;
+            printf("私はチョキを出しました。\n");
             break;
         case 2:
             pon = 5;
-            break;
-    }
-    return((JPON)pon);
-}
-
-void watashinoken(JPON ken){
-    switch(ken){
-        case Gu:
-            printf("私はグーを出しました。\n");
-            break;
-        case Choki:
-            printf("私はチョキを出しました。\n");
-            break;
-        case Pa:
             printf("私はパーを出しました。\n");
             break;
     }
+    return((JPON)pon);
 }
 
 void anatanoken(JPON ken){
@@ -110,11 +99,10 @@ int main(void){
             }
         } while(!(choken == Gu || choken == Choki || choken == Pa));
 
-        sysken = sysjan();
-
         printf("\a");
         anatanoken(choken);
-        watashinoken(sysken);
+
+        sysken = sysjan();
         shoubukekka = shoubu(choken, sysken);
 
         score[shoubukekka] += 1;
