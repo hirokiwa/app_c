@@ -9,6 +9,7 @@ int main(int argc, char *argv[]){
         puts("引数の個数が違います");
         exit(1);
     }
+    
 
     float area;
     area = (float)(atoi(argv[1]) * atoi(argv[1])) * M_PI;
