@@ -36,7 +36,7 @@ int main(void){
         sum += p->shinchou;
         p++;
     }
-    printf("平均身長：%.2f\n\n",sum/NUMBER);
+    printf("平均身長：%.1f\n\n",sum/NUMBER);
 
     // average weight
     sum = 0;
@@ -45,7 +45,7 @@ int main(void){
         sum += p->taijuu;
         p++;
     }
-    printf("平均体重：%.2f\n\n",sum/NUMBER);
+    printf("平均体重：%.1f\n\n",sum/NUMBER);
 
     // maximum weight
     p = fitness + 1;
