@@ -1,16 +1,7 @@
-// 20,15,13,277.5
+// 20,15,13,227.5
 // 25,14,17,311.5
 
 #include <stdio.h>
-
-void set(int *data){
-    printf("下辺＝");
-    scanf("%d", data);
-    printf("上辺＝");
-    scanf("%d", data+1);
-    printf("高さ＝");
-    scanf("%d", data+2);
-}
 
 int main(void){
     typedef struct daikei{
