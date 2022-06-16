@@ -28,6 +28,8 @@ int main(void){
     printf("高さ＝");
     scanf("%d", &db.takasa);
 
+    printf("\n");
+
     printf("台形Aの面積は%.1fです。\n",(double)((double)(da.jouhen + da.kahen) / 2 * da.takasa));
     printf("台形Bの面積は%.1fです。\n",(double)((double)(db.jouhen + db.kahen) / 2 * db.takasa));
 
