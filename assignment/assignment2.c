@@ -27,17 +27,6 @@ int enqueu(char *data){
 }
 
 int dequeue(void){
-    // if(top == NULL && tail == NULL){
-    //     puts("UNDERFLOW!!");
-    //     return(1);
-    // }else{
-    //     if(top == tail){
-    //         top = NULL;
-    //         tail = NULL;
-    //     }else{
-    //         top++;
-    //     }
-    // }
 
     if(top == tail){
         if(top == NULL){

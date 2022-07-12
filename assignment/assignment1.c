@@ -2,6 +2,7 @@
 #include <string.h>
 
 #define STACK_SIZE 10
+
 char stack[STACK_SIZE];
 char *top = NULL;
 
