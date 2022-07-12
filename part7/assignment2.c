@@ -1,49 +1,65 @@
 #include <stdio.h>
 #include <string.h>
 
-#define STACK_SIZE 10
-char stack[STACK_SIZE];
+#define QUEUE_SIZE 10
+
+char queue[100];
 char *top = NULL;
+char *tail = NULL;
 
-int push(char *data){
+int enqueu(char *data){
 
-    if(top == &stack[STACK_SIZE - 1]){
+    if(tail == top + QUEUE_SIZE - 1){
         puts("OVERFLOW!!");
         return(1);
     }else{
+        if(top == NULL && tail == NULL){
+            top = queue;
+            tail = queue;
+        }else{
+            tail++;
+        }
+
+        *tail = *data;
+    }
+
+    return(0);
+}
+
+int dequeue(void){
+    // if(top == NULL && tail == NULL){
+    //     puts("UNDERFLOW!!");
+    //     return(1);
+    // }else{
+    //     if(top == tail){
+    //         top = NULL;
+    //         tail = NULL;
+    //     }else{
+    //         top++;
+    //     }
+    // }
+
+    if(top == tail){
         if(top == NULL){
-            top = stack;
+            puts("UNDERFLOW!!");
+            return(1);
         }else{
-            top++;
-        }
-
-        *top = *data;
-    }
-
-    return(0);
-}
-
-int pop(void){
-    if(top == NULL){
-        puts("UNDERFLOW!!");
-        return(1);
-    }else{
-        if(top == stack){
             top = NULL;
-        }else{
-            top--;
+            tail = NULL;
         }
+    }else{
+        top++;
     }
 
     return(0);
 }
 
-void stackPrint(void){
-    printf("STACK[");
+void queuePrint(void){
+    printf("QUEUE[");
 
-    char *point = top;
+    char *point = tail;
 
-    for( ; point + 1 != stack && top != NULL; point--){
+    for( ; point + 1 != top && tail != NULL; point--){
         printf(" %c", *point);
     }
 
@@ -70,7 +86,7 @@ int main(void){
 
             re_enter = 0;
             for(int i = 0; command[i] != '\n'; i++){
-                if(!(command[i] == 'P' || command[i] == 'O')){
+                if(!(command[i] == 'E' || command[i] == 'D')){
                     re_enter == 1;
                     break;
                 }
@@ -83,13 +99,12 @@ int main(void){
 
         while(*point_command != '\n'){
             switch (*point_command){
-                case 'P':
-                    if(push(point_data) == 0){
-                        point_data++;
-                    }
+                case 'E':
+                    enqueu(point_data);
+                    point_data++;
                     break;
-                case 'O':
-                    pop();
+                case 'D':
+                    dequeue();
                     break;
                 default:
                     break;
@@ -97,7 +112,7 @@ int main(void){
             point_command++;
         }
 
-        stackPrint();
+        queuePrint();
 
     } while(1);
 
