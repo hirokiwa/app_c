@@ -36,16 +36,20 @@ int pop(void){
 
 void stackPrint(void){
     printf("STACK[");
-    for(int i = 0; &stack[i] != top + 1; i++){
-        printf("%c", stack[i]);
+
+    char *point = top;
+
+    for( ; point + 1 != stack; point--){
+        printf(" %c", *point);
     }
-    printf("]\n");
+
+    printf(" ]\n");
 }
 
 int main(void){
     // command
     char command[30];
-    char *operation;
+    char *point_command;
     char data[] = "ABCDEFGHIJKLMN";
     char *point_data;
 
@@ -71,10 +75,10 @@ int main(void){
         }while(re_enter == 1);
 
         point_data = data;
-        operation = command;
+        point_command = command;
 
-        while(*operation != '\n'){
-            switch (*operation){
+        while(*point_command != '\n'){
+            switch (*point_command){
                 case 'P':
                     push(point_data);
                     point_data++;
@@ -85,7 +89,7 @@ int main(void){
                 default:
                     break;
             }
-            operation++;
+            point_command++;
         }
 
         stackPrint();
