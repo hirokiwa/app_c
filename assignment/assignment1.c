@@ -99,6 +99,7 @@ int main(void){
         }
 
         stackPrint();
+        top = NULL;
 
     } while(1);
 

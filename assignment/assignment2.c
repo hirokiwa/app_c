@@ -89,8 +89,9 @@ int main(void){
         while(*point_command != '\n'){
             switch (*point_command){
                 case 'E':
-                    enqueu(point_data);
-                    point_data++;
+                    if(enqueu(point_data) == 0){
+                        point_data++;
+                    }
                     break;
                 case 'D':
                     dequeue();
@@ -102,6 +103,9 @@ int main(void){
         }
 
         queuePrint();
+
+        top = NULL;
+        tail = NULL;
 
     } while(1);
 
