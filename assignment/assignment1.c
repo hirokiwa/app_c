@@ -42,10 +42,8 @@ int pop(void){
 void stackPrint(void){
     printf("STACK[");
 
-    char *point = top;
-
-    for( ; point + 1 != stack && top != NULL; point--){
-        printf(" %c", *point);
+    for(int i = 0; &stack[i] != top + 1 && top != NULL; i++){
+        printf(" %c", stack[i]);
     }
 
     printf(" ]\n");

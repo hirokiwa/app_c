@@ -46,9 +46,9 @@ int dequeue(void){
 void queuePrint(void){
     printf("QUEUE[");
 
-    char *point = tail;
+    char *point = top;
 
-    for( ; point + 1 != top && tail != NULL; point--){
+    for(; point != tail + 1 && top != NULL; point++){
         printf(" %c", *point);
     }
 
