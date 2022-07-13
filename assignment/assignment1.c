@@ -64,6 +64,7 @@ int main(void){
             fgets(command, 30, stdin);
 
             if(command[0] == 'Q' && command[1] == '\n'){
+                puts("終了します。");
                 return(0);
             }
 
